@@ -1,0 +1,107 @@
+<view class="page-shell home-page">
+  <view class="topline">
+    <view>
+      <view class="eyebrow">WEEKEND UNBOXED</view>
+      <view class="city-line">上海限定 · SHANGHAI</view>
+    </view>
+    <view class="edition">试验版 01</view>
+  </view>
+
+  <view class="hero">
+    <text class="hero-small">周末别再想了</text>
+    <text class="hero-title">让城市替你做决定。</text>
+    <text class="hero-copy">一个具体任务，一次陌生体验。你只需要出门。</text>
+  </view>
+
+  <view wx:if="{{activePlay}}" class="active-banner" bindtap="goChallenge">
+    <view>
+      <text class="active-label">本周挑战进行中</text>
+      <text class="active-title">{{activePlay.title}}</text>
+    </view>
+    <text class="active-arrow">→</text>
+  </view>
+
+  <view class="mood-section">
+    <view class="mood-heading">
+      <text class="section-label">今天想怎么玩？</text>
+      <text class="optional">不选也可以</text>
+    </view>
+    <view class="mood-grid">
+      <button
+        wx:for="{{moods}}"
+        wx:key="id"
+        class="mood-chip {{selectedMood === item.id ? 'mood-chip--active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="selectMood"
+      >
+        <text class="mood-icon">{{item.icon}}</text>
+        <text>{{item.label}}</text>
+      </button>
+    </view>
+  </view>
+
+  <view wx:if="{{!play && !isDrawing}}" class="blindbox" bindtap="draw">
+    <view class="box-rays"></view>
+    <view class="box-mark">？</view>
+    <view class="box-ticket">NO PLANS / NO PROBLEM</view>
+    <text class="box-title">上海周末盲盒</text>
+    <text class="box-subtitle">里面只有一个答案</text>
+  </view>
+
+  <view wx:if="{{isDrawing}}" class="blindbox blindbox--loading">
+    <view class="loading-orbit"><view class="loading-dot"></view></view>
+    <text class="loading-title">{{loadingText}}</text>
+    <text class="box-subtitle">很快，先别做攻略</text>
+  </view>
+
+  <view wx:if="{{play}}" class="result-card card">
+    <view class="result-top">
+      <view class="result-emoji">{{play.emoji}}</view>
+      <view class="result-number">CITY QUEST / {{play.id}}</view>
+    </view>
+    <view class="result-reason {{wildcard ? 'result-reason--wild' : ''}}">{{reason}}</view>
+    <view class="result-district">{{play.district}}</view>
+    <view class="result-title">{{play.title}}</view>
+    <view class="result-kicker">{{play.kicker}}</view>
+
+    <view class="meta-row">
+      <view class="meta-item">
+        <text class="meta-label">耗时</text>
+        <text class="meta-value">{{play.duration}}</text>
+      </view>
+      <view class="meta-item">
+        <text class="meta-label">预算</text>
+        <text class="meta-value">{{play.budget}}</text>
+      </view>
+      <view class="meta-item">
+        <text class="meta-label">时段</text>
+        <text class="meta-value">{{play.bestTime}}</text>
+      </view>
+    </view>
+
+    <view class="mission-box">
+      <view class="mission-label">你的任务</view>
+      <view class="mission-text">{{play.mission}}</view>
+    </view>
+
+    <button class="map-link" bindtap="openMap">
+      <text>起点 · {{play.location}}</text>
+      <text>查看地图 ↗</text>
+    </button>
+  </view>
+
+  <button wx:if="{{!play}}" class="primary-button draw-button" bindtap="draw" loading="{{isDrawing}}">
+    {{isDrawing ? '正在开盒' : '抽一个周末玩法'}}
+  </button>
+
+  <view wx:if="{{play}}" class="result-actions">
+    <button class="primary-button accept-button" bindtap="accept">收下这个挑战</button>
+    <view class="secondary-actions">
+      <button class="ghost-button half-button" bindtap="draw">换一个</button>
+      <button class="ghost-button half-button" open-type="share">分享</button>
+    </view>
+  </view>
+
+  <view class="footer-note">不需要做完上海，只需要比上周多走一步。</view>
+</view>
+

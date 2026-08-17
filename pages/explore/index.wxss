@@ -1,0 +1,392 @@
+.archive-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 30rpx;
+  border-bottom: 2rpx solid rgba(25, 24, 22, 0.14);
+}
+
+.archive-title {
+  margin-top: 10rpx;
+  font-family: "Songti SC", serif;
+  font-size: 52rpx;
+  font-weight: 900;
+}
+
+.share-button {
+  width: auto;
+  margin: 0;
+  padding: 14rpx 18rpx;
+  background: transparent;
+  border: 2rpx solid #191816;
+  border-radius: 12rpx;
+  color: #191816;
+  font-size: 20rpx;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14rpx;
+  margin-top: 34rpx;
+}
+
+.stat-card {
+  display: flex;
+  min-height: 150rpx;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22rpx;
+  background: #fffdf8;
+  border: 2rpx solid #191816;
+  border-radius: 20rpx;
+}
+
+.stat-card--dark {
+  background: #191816;
+  color: #fffdf8;
+}
+
+.stat-card--yellow {
+  background: #f3c64e;
+}
+
+.stat-value {
+  font-family: Georgia, serif;
+  font-size: 50rpx;
+  font-weight: 900;
+}
+
+.stat-label {
+  font-size: 19rpx;
+  font-weight: 700;
+}
+
+.level-card {
+  margin-top: 18rpx;
+  padding: 28rpx;
+}
+
+.level-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.level-label {
+  color: #8a857d;
+  font-size: 19rpx;
+  font-weight: 700;
+}
+
+.level-name {
+  margin-top: 8rpx;
+  font-size: 30rpx;
+  font-weight: 900;
+}
+
+.level-number {
+  color: #d65335;
+  font-family: Georgia, serif;
+  font-size: 34rpx;
+  font-weight: 900;
+}
+
+.progress-track {
+  height: 14rpx;
+  margin-top: 24rpx;
+  overflow: hidden;
+  background: #e9e2d7;
+  border-radius: 99rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #d65335;
+  border-radius: 99rpx;
+}
+
+.level-next {
+  margin-top: 12rpx;
+  color: #8a857d;
+  font-size: 20rpx;
+}
+
+.profile-card {
+  position: relative;
+  margin-top: 34rpx;
+  padding: 40rpx 34rpx;
+  overflow: hidden;
+  background: #2f5d50;
+  border: 3rpx solid #191816;
+  border-radius: 30rpx;
+  color: #fffdf8;
+  box-shadow: 8rpx 10rpx 0 #191816;
+}
+
+.profile-sticker {
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96rpx;
+  height: 96rpx;
+  background: #f3c64e;
+  border: 3rpx solid #191816;
+  border-radius: 50%;
+  color: #191816;
+  font-size: 17rpx;
+  font-weight: 900;
+  line-height: 1.05;
+  text-align: center;
+  transform: rotate(9deg);
+}
+
+.profile-label {
+  color: #b9cfb4;
+  font-size: 20rpx;
+  font-weight: 800;
+  letter-spacing: 3rpx;
+}
+
+.profile-title {
+  max-width: 500rpx;
+  margin-top: 18rpx;
+  font-family: "Songti SC", serif;
+  font-size: 48rpx;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.profile-copy {
+  max-width: 560rpx;
+  margin-top: 22rpx;
+  color: #d8e3d4;
+  font-size: 24rpx;
+  line-height: 1.7;
+}
+
+.profile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 28rpx;
+}
+
+.profile-tag {
+  padding: 11rpx 16rpx;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1rpx solid rgba(255, 255, 255, 0.22);
+  border-radius: 999rpx;
+  color: #fffdf8;
+  font-size: 20rpx;
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 56rpx;
+}
+
+.section-title {
+  margin-top: 8rpx;
+}
+
+.section-count {
+  color: #918b82;
+  font-size: 20rpx;
+}
+
+.badge-scroll {
+  width: calc(100% + 32rpx);
+  margin-top: 24rpx;
+}
+
+.badge-row {
+  display: inline-flex;
+  gap: 16rpx;
+  padding: 4rpx 32rpx 12rpx 0;
+}
+
+.badge-card {
+  display: flex;
+  box-sizing: border-box;
+  width: 210rpx;
+  height: 230rpx;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18rpx;
+  background: #fffdf8;
+  border: 2rpx solid #191816;
+  border-radius: 24rpx;
+  box-shadow: 5rpx 6rpx 0 #191816;
+}
+
+.badge-card--locked {
+  background: #e7e1d7;
+  border-color: #b7afa4;
+  box-shadow: none;
+  color: #999188;
+}
+
+.badge-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88rpx;
+  height: 88rpx;
+  background: #f3c64e;
+  border: 2rpx solid #191816;
+  border-radius: 50%;
+  font-size: 44rpx;
+}
+
+.badge-card--locked .badge-icon {
+  background: #d6cfc4;
+  border-color: #b7afa4;
+}
+
+.badge-name {
+  margin-top: 18rpx;
+  font-size: 23rpx;
+  font-weight: 900;
+}
+
+.badge-need {
+  margin-top: 8rpx;
+  color: #918b82;
+  font-size: 17rpx;
+  text-align: center;
+}
+
+.timeline-heading {
+  margin-bottom: 26rpx;
+}
+
+.timeline-item {
+  display: flex;
+}
+
+.timeline-rail {
+  display: flex;
+  width: 42rpx;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline-dot {
+  flex: 0 0 20rpx;
+  width: 20rpx;
+  height: 20rpx;
+  margin-top: 30rpx;
+  background: #c5beb3;
+  border: 4rpx solid #f4f0e8;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2rpx #c5beb3;
+}
+
+.timeline-dot--done {
+  background: #d65335;
+  box-shadow: 0 0 0 2rpx #d65335;
+}
+
+.timeline-line {
+  width: 2rpx;
+  min-height: 210rpx;
+  flex: 1;
+  background: #cfc8bd;
+}
+
+.record-card {
+  flex: 1;
+  margin-bottom: 22rpx;
+  padding: 26rpx;
+}
+
+.record-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.record-date {
+  color: #8a857d;
+  font-size: 18rpx;
+}
+
+.record-status {
+  margin-top: 8rpx;
+  color: #7b3f2c;
+  font-size: 20rpx;
+  font-weight: 800;
+}
+
+.record-face {
+  font-size: 38rpx;
+}
+
+.record-title {
+  margin-top: 18rpx;
+  font-size: 28rpx;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.record-tags {
+  margin-top: 14rpx;
+  color: #2f5d50;
+  font-size: 20rpx;
+  font-weight: 700;
+}
+
+.record-note {
+  margin-top: 16rpx;
+  padding: 18rpx;
+  background: #f3efe7;
+  border-radius: 14rpx;
+  color: #625e57;
+  font-family: "Songti SC", serif;
+  font-size: 23rpx;
+  line-height: 1.6;
+}
+
+.empty-archive {
+  display: flex;
+  min-height: 420rpx;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.empty-lines {
+  color: #c2baaf;
+  font-size: 30rpx;
+  letter-spacing: 10rpx;
+}
+
+.empty-archive-title {
+  margin-top: 28rpx;
+  font-size: 32rpx;
+  font-weight: 900;
+}
+
+.empty-archive-copy {
+  max-width: 520rpx;
+  margin-top: 16rpx;
+  color: #8a857d;
+  font-size: 23rpx;
+  line-height: 1.65;
+}
+
+.archive-button {
+  width: 100%;
+  margin-top: 30rpx;
+}
+

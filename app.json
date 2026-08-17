@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/challenge/index",
+    "pages/explore/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#F4F0E8",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "周末有解",
+    "backgroundColor": "#F4F0E8",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#77736B",
+    "selectedColor": "#191816",
+    "backgroundColor": "#FFFDF8",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "抽盲盒"
+      },
+      {
+        "pagePath": "pages/challenge/index",
+        "text": "本周挑战"
+      },
+      {
+        "pagePath": "pages/explore/index",
+        "text": "探索档案"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
+

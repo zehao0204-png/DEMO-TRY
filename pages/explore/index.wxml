@@ -1,0 +1,102 @@
+<view class="page-shell explore-page">
+  <view class="archive-header">
+    <view>
+      <view class="eyebrow">MY CITY ARCHIVE</view>
+      <view class="archive-title">我的上海探索</view>
+    </view>
+    <button class="share-button" open-type="share">分享 ↗</button>
+  </view>
+
+  <view class="stats-grid">
+    <view class="stat-card stat-card--dark">
+      <text class="stat-value">{{completedCount}}</text>
+      <text class="stat-label">完成挑战</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-value">{{districtCount}}</text>
+      <text class="stat-label">点亮区域</text>
+    </view>
+    <view class="stat-card stat-card--yellow">
+      <text class="stat-value">{{averageRating}}</text>
+      <text class="stat-label">平均感受 / 4</text>
+    </view>
+  </view>
+
+  <view class="level-card card">
+    <view class="level-top">
+      <view>
+        <view class="level-label">当前等级</view>
+        <view class="level-name">{{levelName}}</view>
+      </view>
+      <view class="level-number">LV.{{completedCount + 1}}</view>
+    </view>
+    <view class="progress-track">
+      <view class="progress-fill" style="width: {{levelProgress}}%;"></view>
+    </view>
+    <view class="level-next">{{nextLevelText}}</view>
+  </view>
+
+  <view class="profile-card">
+    <view class="profile-sticker">CITY<br/>TYPE</view>
+    <view class="profile-label">你的上海人格</view>
+    <view class="profile-title">{{profile.title}}</view>
+    <view class="profile-copy">{{profile.description}}</view>
+    <view class="profile-tags" wx:if="{{profile.topTags.length}}">
+      <view class="profile-tag" wx:for="{{profile.topTags}}" wx:key="*this"># {{item}}</view>
+    </view>
+  </view>
+
+  <view class="section-heading">
+    <view>
+      <view class="eyebrow">STAMP COLLECTION</view>
+      <view class="section-title">城市印章</view>
+    </view>
+    <view class="section-count">{{completedCount}} 次探索</view>
+  </view>
+
+  <scroll-view class="badge-scroll" scroll-x enable-flex>
+    <view class="badge-row">
+      <view class="badge-card {{item.unlocked ? '' : 'badge-card--locked'}}" wx:for="{{badges}}" wx:key="name">
+        <view class="badge-icon">{{item.unlocked ? item.icon : '？'}}</view>
+        <view class="badge-name">{{item.name}}</view>
+        <view class="badge-need">{{item.unlocked ? '已解锁' : item.need}}</view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="section-heading timeline-heading">
+    <view>
+      <view class="eyebrow">FIELD NOTES</view>
+      <view class="section-title">探索记录</view>
+    </view>
+  </view>
+
+  <view wx:if="{{hasRecords}}" class="timeline">
+    <view class="timeline-item" wx:for="{{timeline}}" wx:key="finishedAt">
+      <view class="timeline-rail">
+        <view class="timeline-dot {{item.status === 'completed' ? 'timeline-dot--done' : ''}}"></view>
+        <view class="timeline-line"></view>
+      </view>
+      <view class="record-card card">
+        <view class="record-top">
+          <view>
+            <view class="record-date">{{item.dateText}} · {{item.play.district}}</view>
+            <view class="record-status">{{item.statusText}}</view>
+          </view>
+          <view class="record-face">{{item.face}}</view>
+        </view>
+        <view class="record-title">{{item.play.title}}</view>
+        <view wx:if="{{item.tagsText}}" class="record-tags">{{item.tagsText}}</view>
+        <view wx:if="{{item.note}}" class="record-note">“{{item.note}}”</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="empty-archive">
+    <view class="empty-lines">— · — · —</view>
+    <view class="empty-archive-title">这里还没有城市故事</view>
+    <view class="empty-archive-copy">完成一次挑战后，你的印章、感受和城市人格会出现在这里。</view>
+    <button class="primary-button archive-button" bindtap="goHome">开始第一次探索</button>
+  </view>
+</view>
+

@@ -1,0 +1,118 @@
+<view class="page-shell challenge-page">
+  <block wx:if="{{justCompleted}}">
+    <view class="success-view">
+      <view class="success-confetti">✦ · ✷ · ✦</view>
+      <view class="stamp-ring">
+        <view class="stamp-inner">
+          <text class="stamp-emoji">{{completedPlay.emoji}}</text>
+          <text class="stamp-name">{{completedPlay.stamp}}</text>
+          <text class="stamp-city">SHANGHAI</text>
+        </view>
+      </view>
+      <view class="eyebrow">QUEST COMPLETE</view>
+      <view class="success-title">挑战完成！</view>
+      <view class="success-copy">这是你完成的第 {{completedCount}} 个上海玩法。真实体验已经加入下一次推荐。</view>
+      <button class="primary-button success-button" bindtap="goExplore">查看探索档案</button>
+      <button class="ghost-button success-button" bindtap="goHome">再抽一个</button>
+    </view>
+  </block>
+
+  <block wx:elif="{{play}}">
+    <view class="challenge-header">
+      <view class="eyebrow">YOUR WEEKEND QUEST</view>
+      <view class="challenge-count">01 / ACTIVE</view>
+    </view>
+
+    <view class="challenge-title">这周，就完成这一件事。</view>
+
+    <view class="quest-card card">
+      <view class="quest-ticket">
+        <text>{{play.district}}</text>
+        <text>{{acceptedText}}</text>
+      </view>
+      <view class="quest-symbol">{{play.emoji}}</view>
+      <view class="quest-title">{{play.title}}</view>
+      <view class="quest-kicker">{{play.kicker}}</view>
+
+      <view class="quest-mission">
+        <view class="quest-label">本次任务</view>
+        <view class="quest-mission-text">{{play.mission}}</view>
+      </view>
+
+      <view class="steps-title">行动清单</view>
+      <view class="step" wx:for="{{play.steps}}" wx:key="*this">
+        <view class="step-number">{{index + 1}}</view>
+        <view class="step-text">{{item}}</view>
+      </view>
+
+      <button class="location-card" bindtap="openMap">
+        <view>
+          <view class="location-label">从这里开始</view>
+          <view class="location-name">{{play.location}}</view>
+          <view class="location-address">{{play.address}}</view>
+        </view>
+        <view class="location-arrow">↗</view>
+      </button>
+
+      <view class="safety-tip">提示：{{play.tip}}</view>
+    </view>
+
+    <button class="primary-button finish-button" bindtap="openFeedback">我完成了</button>
+    <view class="minor-actions">
+      <button class="minor-button" open-type="share">叫朋友一起</button>
+      <button class="minor-button muted-action" bindtap="abandon">先放回盲盒</button>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="empty-state">
+      <view class="empty-symbol">○</view>
+      <view class="eyebrow">NO ACTIVE QUEST</view>
+      <view class="empty-title">本周还没有挑战</view>
+      <view class="empty-copy">别做攻略，去盲盒里拿走一个具体答案。</view>
+      <button class="primary-button empty-button" bindtap="goHome">去抽一个</button>
+    </view>
+  </block>
+
+  <view wx:if="{{feedbackOpen}}" class="sheet-mask" bindtap="closeFeedback"></view>
+  <view class="feedback-sheet {{feedbackOpen ? 'feedback-sheet--open' : ''}}">
+    <view class="sheet-handle"></view>
+    <view class="feedback-eyebrow">完成最后一步</view>
+    <view class="feedback-title">这次体验怎么样？</view>
+    <view class="rating-grid">
+      <button
+        wx:for="{{ratingOptions}}"
+        wx:key="value"
+        class="rating-item {{rating === item.value ? 'rating-item--active' : ''}}"
+        data-value="{{item.value}}"
+        bindtap="selectRating"
+      >
+        <text class="rating-face">{{item.face}}</text>
+        <text class="rating-label">{{item.label}}</text>
+      </button>
+    </view>
+
+    <view wx:if="{{rating}}" class="tag-section">
+      <view class="tag-heading">为什么？可多选</view>
+      <view class="tag-list">
+        <button
+          wx:for="{{visibleTags}}"
+          wx:key="label"
+          class="feedback-tag {{item.selected ? 'feedback-tag--active' : ''}}"
+          data-tag="{{item.label}}"
+          bindtap="toggleTag"
+        >{{item.label}}</button>
+      </view>
+    </view>
+
+    <textarea
+      wx:if="{{rating}}"
+      class="note-input"
+      placeholder="给这次探索留句话（选填）"
+      maxlength="80"
+      value="{{note}}"
+      bindinput="inputNote"
+    ></textarea>
+    <button class="primary-button submit-button" bindtap="submitFeedback">盖章并完成</button>
+  </view>
+</view>

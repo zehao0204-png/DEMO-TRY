@@ -1,0 +1,413 @@
+.challenge-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.challenge-count {
+  color: #8a857d;
+  font-size: 19rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+}
+
+.challenge-title {
+  margin: 34rpx 0;
+  font-family: "Songti SC", serif;
+  font-size: 54rpx;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.quest-card {
+  padding: 0 32rpx 36rpx;
+  overflow: hidden;
+}
+
+.quest-ticket {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 -32rpx 34rpx;
+  padding: 20rpx 30rpx;
+  background: #2f5d50;
+  color: #fffdf8;
+  font-size: 20rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+}
+
+.quest-symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100rpx;
+  height: 100rpx;
+  background: #f3c64e;
+  border: 3rpx solid #191816;
+  border-radius: 26rpx;
+  font-size: 54rpx;
+  box-shadow: 6rpx 6rpx 0 #191816;
+  transform: rotate(-3deg);
+}
+
+.quest-title {
+  margin-top: 32rpx;
+  font-family: "Songti SC", serif;
+  font-size: 48rpx;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.quest-kicker {
+  margin-top: 16rpx;
+  color: #77736b;
+  font-size: 25rpx;
+}
+
+.quest-mission {
+  margin-top: 32rpx;
+  padding: 26rpx;
+  background: #f1ebe0;
+  border-radius: 22rpx;
+}
+
+.quest-label,
+.steps-title,
+.location-label {
+  color: #7b3f2c;
+  font-size: 20rpx;
+  font-weight: 800;
+  letter-spacing: 2rpx;
+}
+
+.quest-mission-text {
+  margin-top: 12rpx;
+  font-size: 27rpx;
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+.steps-title {
+  margin: 34rpx 0 20rpx;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 22rpx;
+}
+
+.step-number {
+  display: flex;
+  flex: 0 0 42rpx;
+  align-items: center;
+  justify-content: center;
+  width: 42rpx;
+  height: 42rpx;
+  margin-right: 18rpx;
+  background: #191816;
+  border-radius: 50%;
+  color: #fffdf8;
+  font-size: 20rpx;
+  font-weight: 800;
+}
+
+.step-text {
+  padding-top: 4rpx;
+  font-size: 25rpx;
+  line-height: 1.55;
+}
+
+.location-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: auto;
+  margin-top: 30rpx;
+  padding: 26rpx;
+  background: #dce8cb;
+  border-radius: 22rpx;
+  color: #191816;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.location-name {
+  margin-top: 10rpx;
+  font-size: 27rpx;
+  font-weight: 800;
+}
+
+.location-address {
+  margin-top: 8rpx;
+  color: #66705e;
+  font-size: 20rpx;
+}
+
+.location-arrow {
+  font-size: 38rpx;
+}
+
+.safety-tip {
+  margin-top: 24rpx;
+  color: #918b82;
+  font-size: 20rpx;
+  line-height: 1.6;
+}
+
+.finish-button {
+  margin-top: 32rpx;
+  background: #d65335;
+}
+
+.minor-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 18rpx;
+}
+
+.minor-button {
+  flex: 1;
+  background: transparent;
+  color: #4e4a43;
+  font-size: 23rpx;
+  font-weight: 700;
+}
+
+.muted-action {
+  color: #989188;
+}
+
+.empty-state,
+.success-view {
+  display: flex;
+  min-height: 76vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.empty-symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150rpx;
+  height: 150rpx;
+  margin-bottom: 34rpx;
+  border: 4rpx dashed #b8b0a5;
+  border-radius: 50%;
+  color: #a79f94;
+  font-size: 80rpx;
+}
+
+.empty-title,
+.success-title {
+  margin-top: 20rpx;
+  font-family: "Songti SC", serif;
+  font-size: 52rpx;
+  font-weight: 900;
+}
+
+.empty-copy,
+.success-copy {
+  max-width: 560rpx;
+  margin-top: 20rpx;
+  color: #77736b;
+  font-size: 25rpx;
+  line-height: 1.65;
+}
+
+.empty-button,
+.success-button {
+  width: 100%;
+  margin-top: 36rpx;
+}
+
+.success-confetti {
+  margin-bottom: 24rpx;
+  color: #d65335;
+  font-size: 34rpx;
+  letter-spacing: 18rpx;
+}
+
+.stamp-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250rpx;
+  height: 250rpx;
+  margin-bottom: 34rpx;
+  border: 8rpx double #d65335;
+  border-radius: 50%;
+  color: #d65335;
+  transform: rotate(-5deg);
+}
+
+.stamp-inner {
+  display: flex;
+  width: 210rpx;
+  height: 210rpx;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 3rpx dashed #d65335;
+  border-radius: 50%;
+}
+
+.stamp-emoji {
+  font-size: 58rpx;
+}
+
+.stamp-name {
+  margin-top: 6rpx;
+  font-size: 25rpx;
+  font-weight: 900;
+}
+
+.stamp-city {
+  margin-top: 6rpx;
+  font-size: 15rpx;
+  font-weight: 800;
+  letter-spacing: 4rpx;
+}
+
+.sheet-mask {
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(25, 24, 22, 0.55);
+}
+
+.feedback-sheet {
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  max-height: 88vh;
+  padding: 20rpx 32rpx calc(36rpx + env(safe-area-inset-bottom));
+  overflow-y: auto;
+  background: #fffdf8;
+  border-radius: 36rpx 36rpx 0 0;
+  transform: translateY(105%);
+  transition: transform 260ms ease;
+}
+
+.feedback-sheet--open {
+  transform: translateY(0);
+}
+
+.sheet-handle {
+  width: 80rpx;
+  height: 8rpx;
+  margin: 0 auto 28rpx;
+  background: #d9d3c9;
+  border-radius: 99rpx;
+}
+
+.feedback-eyebrow {
+  color: #7b3f2c;
+  font-size: 20rpx;
+  font-weight: 800;
+  letter-spacing: 3rpx;
+}
+
+.feedback-title {
+  margin-top: 10rpx;
+  font-family: "Songti SC", serif;
+  font-size: 46rpx;
+  font-weight: 900;
+}
+
+.rating-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12rpx;
+  margin-top: 30rpx;
+}
+
+.rating-item {
+  display: flex;
+  height: 132rpx;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: #f3efe7;
+  border: 2rpx solid transparent;
+  border-radius: 20rpx;
+}
+
+.rating-item--active {
+  background: #f3c64e;
+  border-color: #191816;
+  box-shadow: 4rpx 4rpx 0 #191816;
+  transform: translate(-2rpx, -2rpx);
+}
+
+.rating-face {
+  font-size: 44rpx;
+}
+
+.rating-label {
+  margin-top: 10rpx;
+  font-size: 19rpx;
+  font-weight: 700;
+}
+
+.tag-section {
+  margin-top: 30rpx;
+}
+
+.tag-heading {
+  margin-bottom: 16rpx;
+  color: #77736b;
+  font-size: 22rpx;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.feedback-tag {
+  width: auto;
+  margin: 0;
+  padding: 16rpx 22rpx;
+  background: #f3efe7;
+  border: 2rpx solid transparent;
+  border-radius: 999rpx;
+  color: #625e57;
+  font-size: 21rpx;
+  line-height: 1;
+}
+
+.feedback-tag--active {
+  background: #dce8cb;
+  border-color: #2f5d50;
+  color: #2f5d50;
+}
+
+.note-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 150rpx;
+  margin-top: 26rpx;
+  padding: 22rpx;
+  background: #f3efe7;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+}
+
+.submit-button {
+  margin-top: 24rpx;
+  background: #d65335;
+}
+

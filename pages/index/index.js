@@ -1,0 +1,120 @@
+const plays = require('../../data/plays')
+const { pickPlay } = require('../../utils/recommend')
+
+Page({
+  data: {
+    moods: [
+      { id: 'random', icon: '🎲', label: '随机盲盒' },
+      { id: 'healing', icon: '🌿', label: '放空治愈' },
+      { id: 'thrill', icon: '🧗', label: '新鲜刺激' },
+      { id: 'arts', icon: '🎨', label: '文艺漫游' },
+      { id: 'outdoors', icon: '🏃', label: '户外出汗' },
+      { id: 'night', icon: '🌙', label: '夜间出逃' }
+    ],
+    selectedMood: 'random',
+    play: null,
+    reason: '',
+    wildcard: false,
+    isDrawing: false,
+    activePlay: null,
+    loadingText: '正在翻找上海的隐藏玩法…'
+  },
+
+  onShow() {
+    const state = getApp().getState()
+    this.setData({
+      activePlay: state.current ? plays.find(play => play.id === state.current.playId) : null
+    })
+  },
+
+  onUnload() {
+    if (this.drawTimer) clearTimeout(this.drawTimer)
+  },
+
+  selectMood(event) {
+    this.setData({ selectedMood: event.currentTarget.dataset.id })
+  },
+
+  draw() {
+    if (this.data.isDrawing) return
+    const messages = [
+      '正在避开商场和热门榜单…',
+      '正在翻找上海的隐藏玩法…',
+      '正在给平常的周末换个方向…'
+    ]
+    this.setData({
+      isDrawing: true,
+      play: null,
+      loadingText: messages[Math.floor(Math.random() * messages.length)]
+    })
+    this.drawTimer = setTimeout(() => {
+      const app = getApp()
+      const state = app.getState()
+      const result = pickPlay(plays, {
+        mood: this.data.selectedMood,
+        tagScores: state.tagScores,
+        seenIds: state.seenIds
+      })
+      app.recordSeen(result.play.id)
+      this.setData({
+        play: result.play,
+        reason: result.reason,
+        wildcard: result.wildcard,
+        isDrawing: false
+      })
+    }, 700)
+  },
+
+  accept() {
+    const play = this.data.play
+    if (!play) return
+    const state = getApp().getState()
+    if (state.current && state.current.playId === play.id) {
+      wx.switchTab({ url: '/pages/challenge/index' })
+      return
+    }
+    if (state.current) {
+      wx.showModal({
+        title: '替换本周挑战？',
+        content: '之前收下的挑战会被放回记录，但不会增加闯关进度。',
+        confirmText: '替换',
+        success: result => {
+          if (result.confirm) this.saveChallenge(play)
+        }
+      })
+      return
+    }
+    this.saveChallenge(play)
+  },
+
+  saveChallenge(play) {
+    getApp().acceptChallenge(play.id)
+    wx.showToast({ title: '挑战已收下', icon: 'success' })
+    setTimeout(() => wx.switchTab({ url: '/pages/challenge/index' }), 450)
+  },
+
+  openMap() {
+    const play = this.data.play
+    if (!play) return
+    wx.openLocation({
+      latitude: play.latitude,
+      longitude: play.longitude,
+      name: play.location,
+      address: play.address,
+      scale: 16
+    })
+  },
+
+  goChallenge() {
+    wx.switchTab({ url: '/pages/challenge/index' })
+  },
+
+  onShareAppMessage() {
+    const play = this.data.play
+    return {
+      title: play ? `我抽到了：${play.title}` : '周末别想了，抽一个上海城市玩法',
+      path: '/pages/index/index'
+    }
+  }
+})
+

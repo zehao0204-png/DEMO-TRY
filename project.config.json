@@ -1,0 +1,26 @@
+{
+  "description": "周末有解：上海城市玩法盲盒微信小程序",
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "folder",
+        "value": "tests"
+      }
+    ]
+  },
+  "setting": {
+    "useCompilerPlugins": false,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "enhance": true,
+    "showShadowRootInWxmlPanel": true,
+    "packNpmManually": false
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.8.10",
+  "appid": "touristappid",
+  "projectname": "weekend-unboxed-shanghai",
+  "condition": {}
+}
+

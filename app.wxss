@@ -1,0 +1,87 @@
+page {
+  min-height: 100%;
+  background: #f4f0e8;
+  color: #191816;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+button {
+  font: inherit;
+}
+
+button::after {
+  border: 0;
+}
+
+.page-shell {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 32rpx 32rpx 64rpx;
+}
+
+.eyebrow {
+  color: #7b3f2c;
+  font-size: 22rpx;
+  font-weight: 700;
+  letter-spacing: 4rpx;
+  text-transform: uppercase;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 38rpx;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.muted {
+  color: #77736b;
+}
+
+.primary-button,
+.secondary-button,
+.ghost-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96rpx;
+  border-radius: 28rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.primary-button {
+  background: #191816;
+  color: #fffdf8;
+  box-shadow: 0 16rpx 32rpx rgba(25, 24, 22, 0.16);
+}
+
+.secondary-button {
+  background: #f3c64e;
+  color: #191816;
+}
+
+.ghost-button {
+  background: rgba(255, 255, 255, 0.56);
+  color: #191816;
+  border: 2rpx solid rgba(25, 24, 22, 0.12);
+}
+
+.card {
+  background: #fffdf8;
+  border: 2rpx solid rgba(25, 24, 22, 0.08);
+  border-radius: 36rpx;
+  box-shadow: 0 16rpx 48rpx rgba(71, 55, 36, 0.08);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 12rpx 20rpx;
+  border-radius: 999rpx;
+  background: #eee7da;
+  color: #4e4a43;
+  font-size: 22rpx;
+  line-height: 1;
+}
+

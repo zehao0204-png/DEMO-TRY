@@ -1,0 +1,422 @@
+.home-page {
+  overflow: hidden;
+}
+
+.topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 28rpx;
+  border-bottom: 2rpx solid rgba(25, 24, 22, 0.14);
+}
+
+.city-line {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.edition {
+  padding: 10rpx 14rpx;
+  border: 2rpx solid #191816;
+  border-radius: 8rpx;
+  font-size: 18rpx;
+  font-weight: 700;
+  transform: rotate(2deg);
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  padding: 56rpx 0 46rpx;
+}
+
+.hero-small {
+  margin-bottom: 8rpx;
+  color: #77736b;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.hero-title {
+  max-width: 630rpx;
+  font-family: "Songti SC", serif;
+  font-size: 70rpx;
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -4rpx;
+}
+
+.hero-copy {
+  margin-top: 26rpx;
+  color: #625e57;
+  font-size: 26rpx;
+  line-height: 1.7;
+}
+
+.active-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40rpx;
+  padding: 24rpx 26rpx;
+  background: #dce8cb;
+  border: 2rpx solid #191816;
+  border-radius: 22rpx;
+}
+
+.active-label,
+.active-title {
+  display: block;
+}
+
+.active-label {
+  margin-bottom: 8rpx;
+  font-size: 20rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+}
+
+.active-title {
+  max-width: 540rpx;
+  font-size: 25rpx;
+  font-weight: 700;
+}
+
+.active-arrow {
+  font-size: 40rpx;
+}
+
+.mood-section {
+  margin-bottom: 40rpx;
+}
+
+.mood-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22rpx;
+}
+
+.section-label {
+  font-size: 28rpx;
+  font-weight: 800;
+}
+
+.optional {
+  color: #8a857d;
+  font-size: 22rpx;
+}
+
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14rpx;
+}
+
+.mood-chip {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 78rpx;
+  padding: 0 16rpx;
+  background: rgba(255, 253, 248, 0.66);
+  border: 2rpx solid rgba(25, 24, 22, 0.1);
+  border-radius: 20rpx;
+  color: #5f5b54;
+  font-size: 22rpx;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.mood-chip--active {
+  background: #f3c64e;
+  border-color: #191816;
+  color: #191816;
+  box-shadow: 6rpx 6rpx 0 #191816;
+  transform: translate(-3rpx, -3rpx);
+}
+
+.mood-icon {
+  margin-right: 8rpx;
+}
+
+.blindbox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 480rpx;
+  overflow: hidden;
+  background: #d65335;
+  border: 4rpx solid #191816;
+  border-radius: 32rpx;
+  box-shadow: 12rpx 14rpx 0 #191816;
+}
+
+.box-rays {
+  position: absolute;
+  width: 620rpx;
+  height: 620rpx;
+  border: 42rpx dashed rgba(255, 227, 151, 0.28);
+  border-radius: 50%;
+  transform: rotate(12deg);
+}
+
+.box-mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150rpx;
+  height: 150rpx;
+  margin-bottom: 24rpx;
+  background: #f3c64e;
+  border: 4rpx solid #191816;
+  border-radius: 50%;
+  font-family: Georgia, serif;
+  font-size: 96rpx;
+  font-weight: 900;
+  box-shadow: 8rpx 8rpx 0 #191816;
+  transform: rotate(-8deg);
+}
+
+.box-ticket {
+  position: relative;
+  margin-bottom: 18rpx;
+  padding: 8rpx 16rpx;
+  background: #191816;
+  color: #fffdf8;
+  font-size: 18rpx;
+  font-weight: 700;
+  letter-spacing: 3rpx;
+}
+
+.box-title,
+.box-subtitle,
+.loading-title {
+  position: relative;
+}
+
+.box-title {
+  font-family: "Songti SC", serif;
+  font-size: 48rpx;
+  font-weight: 900;
+}
+
+.box-subtitle {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.blindbox--loading {
+  background: #2f5d50;
+  color: #fffdf8;
+}
+
+.loading-orbit {
+  position: relative;
+  width: 150rpx;
+  height: 150rpx;
+  margin-bottom: 44rpx;
+  border: 4rpx solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  animation: spin 1.3s linear infinite;
+}
+
+.loading-dot {
+  position: absolute;
+  top: -12rpx;
+  left: 62rpx;
+  width: 24rpx;
+  height: 24rpx;
+  background: #f3c64e;
+  border-radius: 50%;
+}
+
+.loading-title {
+  font-size: 30rpx;
+  font-weight: 800;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.draw-button {
+  margin-top: 42rpx;
+}
+
+.result-card {
+  position: relative;
+  padding: 34rpx;
+  overflow: hidden;
+  animation: rise 360ms ease-out;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(30rpx) rotate(1deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+.result-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.result-emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 86rpx;
+  height: 86rpx;
+  background: #f3c64e;
+  border: 2rpx solid #191816;
+  border-radius: 24rpx;
+  font-size: 46rpx;
+  transform: rotate(-3deg);
+}
+
+.result-number {
+  max-width: 410rpx;
+  overflow: hidden;
+  color: #99938a;
+  font-size: 16rpx;
+  letter-spacing: 2rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result-reason {
+  display: inline-flex;
+  margin-top: 32rpx;
+  padding: 10rpx 16rpx;
+  background: #dce8cb;
+  border-radius: 10rpx;
+  color: #34472d;
+  font-size: 20rpx;
+  font-weight: 700;
+}
+
+.result-reason--wild {
+  background: #eadcf0;
+  color: #5b3567;
+}
+
+.result-district {
+  margin-top: 28rpx;
+  color: #7b3f2c;
+  font-size: 22rpx;
+  font-weight: 800;
+  letter-spacing: 2rpx;
+}
+
+.result-title {
+  margin-top: 12rpx;
+  font-family: "Songti SC", serif;
+  font-size: 52rpx;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.result-kicker {
+  margin-top: 18rpx;
+  color: #6e6961;
+  font-size: 26rpx;
+  line-height: 1.55;
+}
+
+.meta-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 34rpx;
+  padding: 24rpx 0;
+  border-top: 2rpx dashed #d8d1c5;
+  border-bottom: 2rpx dashed #d8d1c5;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  padding-left: 18rpx;
+  border-right: 2rpx solid #e5dfd4;
+}
+
+.meta-item:last-child {
+  border-right: 0;
+}
+
+.meta-label {
+  margin-bottom: 8rpx;
+  color: #99938a;
+  font-size: 19rpx;
+}
+
+.meta-value {
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.mission-box {
+  margin-top: 28rpx;
+  padding: 26rpx;
+  background: #f1ebe0;
+  border-left: 8rpx solid #d65335;
+  border-radius: 0 20rpx 20rpx 0;
+}
+
+.mission-label {
+  margin-bottom: 10rpx;
+  color: #7b3f2c;
+  font-size: 20rpx;
+  font-weight: 800;
+  letter-spacing: 2rpx;
+}
+
+.mission-text {
+  font-size: 26rpx;
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+.map-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: auto;
+  margin-top: 22rpx;
+  padding: 20rpx 0;
+  background: transparent;
+  color: #4d4943;
+  font-size: 22rpx;
+  line-height: 1.3;
+}
+
+.result-actions {
+  margin-top: 34rpx;
+}
+
+.accept-button {
+  background: #d65335;
+}
+
+.secondary-actions {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+
+.half-button {
+  flex: 1;
+}
+
+.footer-note {
+  margin-top: 42rpx;
+  color: #9a948b;
+  font-size: 20rpx;
+  text-align: center;
+}
+
