@@ -26,6 +26,7 @@ assert.strictEqual(saved.challenges.length, 4)
 app.completeChallenge('second', { rating: 4 }, { id: 'second', traits: ['curious'] })
 assert.strictEqual(saved.challenges.length, 3)
 assert.strictEqual(saved.records[0].status, 'completed')
+assert.strictEqual(saved.stats.completedCount, 1)
 
 app.abandonChallenge('legacy')
 assert.strictEqual(saved.challenges.length, 2)

@@ -40,6 +40,10 @@ Page({
     })
   },
 
+  onCloudStateReady() {
+    this.onShow()
+  },
+
   onUnload() {
     if (this.drawTimer) clearTimeout(this.drawTimer)
   },

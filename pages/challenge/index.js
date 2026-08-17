@@ -34,6 +34,10 @@ Page({
     this.loadChallenges(this.data.play ? this.data.play.id : '')
   },
 
+  onCloudStateReady() {
+    if (!this.data.justCompleted) this.loadChallenges(this.data.play ? this.data.play.id : '')
+  },
+
   loadChallenges(preferredPlayId) {
     const state = getApp().getState()
     const activeChallenges = state.challenges.map(challenge => ({

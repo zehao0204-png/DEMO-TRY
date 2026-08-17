@@ -36,17 +36,23 @@ Page({
     this.refresh()
   },
 
+  onCloudStateReady() {
+    this.refresh()
+  },
+
   onPullDownRefresh() {
     this.refresh()
     wx.stopPullDownRefresh()
   },
 
   refresh() {
-    const records = getApp().getState().records
+    const state = getApp().getState()
+    const records = state.records
     const completed = records.filter(record => record.status === 'completed')
+    const completedCount = state.stats.completedCount
     const districts = new Set(completed.map(record => playMap[record.playId]?.district).filter(Boolean))
     const ratingTotal = completed.reduce((sum, record) => sum + record.rating, 0)
-    const level = getLevel(completed.length)
+    const level = getLevel(completedCount)
     const badges = [
       { icon: '🚪', name: '周末出逃者', need: '完成1次挑战', unlocked: completed.length >= 1 },
       { icon: '👟', name: '街区漫游者', need: '完成3次步行探索', unlocked: countTrait(completed, 'walk') >= 3 },
@@ -68,7 +74,7 @@ Page({
     }).filter(record => record.play)
 
     this.setData({
-      completedCount: completed.length,
+      completedCount,
       districtCount: districts.size,
       averageRating: completed.length ? (ratingTotal / completed.length).toFixed(1) : '—',
       levelNumber: level.level,
