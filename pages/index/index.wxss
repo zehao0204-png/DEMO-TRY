@@ -110,18 +110,24 @@
 
 .mood-grid {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
+}
+
+.mood-row {
+  display: flex;
+  width: 100%;
+  margin-bottom: 14rpx;
 }
 
 .mood-chip {
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: flex-start;
   box-sizing: border-box;
-  width: calc(50% - 7rpx);
+  min-width: 0;
   height: 78rpx;
-  margin: 0 0 14rpx;
+  margin: 0 7rpx 0 0;
   padding: 0 16rpx;
   background: rgba(255, 253, 248, 0.66);
   border: 2rpx solid rgba(25, 24, 22, 0.1);
@@ -130,6 +136,10 @@
   font-size: 22rpx;
   font-weight: 600;
   line-height: 1;
+}
+
+.mood-chip:last-child {
+  margin: 0 0 0 7rpx;
 }
 
 .mood-chip--active {

@@ -3,13 +3,19 @@ const { pickPlay } = require('../../utils/recommend')
 
 Page({
   data: {
-    moods: [
-      { id: 'random', icon: '🎲', label: '随机盲盒' },
-      { id: 'healing', icon: '🌿', label: '放空治愈' },
-      { id: 'thrill', icon: '🧗', label: '新鲜刺激' },
-      { id: 'arts', icon: '🎨', label: '文艺漫游' },
-      { id: 'outdoors', icon: '🏃', label: '户外出汗' },
-      { id: 'night', icon: '🌙', label: '夜间出逃' }
+    moodRows: [
+      { id: 'row-1', items: [
+        { id: 'random', icon: '🎲', label: '随机盲盒' },
+        { id: 'healing', icon: '🌿', label: '放空治愈' }
+      ] },
+      { id: 'row-2', items: [
+        { id: 'thrill', icon: '🧗', label: '新鲜刺激' },
+        { id: 'arts', icon: '🎨', label: '文艺漫游' }
+      ] },
+      { id: 'row-3', items: [
+        { id: 'outdoors', icon: '🏃', label: '户外出汗' },
+        { id: 'night', icon: '🌙', label: '夜间出逃' }
+      ] }
     ],
     selectedMood: 'random',
     play: null,

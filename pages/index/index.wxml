@@ -27,16 +27,19 @@
       <text class="optional">不选也可以</text>
     </view>
     <view class="mood-grid">
-      <button
-        wx:for="{{moods}}"
-        wx:key="id"
-        class="mood-chip {{selectedMood === item.id ? 'mood-chip--active' : ''}}"
-        data-id="{{item.id}}"
-        bindtap="selectMood"
-      >
-        <text class="mood-icon">{{item.icon}}</text>
-        <text>{{item.label}}</text>
-      </button>
+      <view class="mood-row" wx:for="{{moodRows}}" wx:key="id" wx:for-item="row">
+        <button
+          wx:for="{{row.items}}"
+          wx:key="id"
+          wx:for-item="mood"
+          class="mood-chip {{selectedMood === mood.id ? 'mood-chip--active' : ''}}"
+          data-id="{{mood.id}}"
+          bindtap="selectMood"
+        >
+          <text class="mood-icon">{{mood.icon}}</text>
+          <text>{{mood.label}}</text>
+        </button>
+      </view>
     </view>
   </view>
 
