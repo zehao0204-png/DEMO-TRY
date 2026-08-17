@@ -7,7 +7,8 @@ function formatDate(timestamp) {
 
 Page({
   data: {
-    current: null,
+    activeChallenges: [],
+    selectedChallenge: null,
     play: null,
     acceptedText: '',
     feedbackOpen: false,
@@ -30,17 +31,31 @@ Page({
 
   onShow() {
     if (this.data.justCompleted) return
+    this.loadChallenges(this.data.play ? this.data.play.id : '')
+  },
+
+  loadChallenges(preferredPlayId) {
     const state = getApp().getState()
-    const play = state.current ? plays.find(item => item.id === state.current.playId) : null
+    const activeChallenges = state.challenges.map(challenge => ({
+      ...challenge,
+      play: plays.find(item => item.id === challenge.playId)
+    })).filter(item => item.play)
+    const selectedChallenge = activeChallenges.find(item => item.playId === preferredPlayId)
+      || activeChallenges[0]
     this.setData({
-      current: state.current,
-      play,
-      acceptedText: state.current ? formatDate(state.current.acceptedAt) : '',
+      activeChallenges,
+      selectedChallenge: selectedChallenge || null,
+      play: selectedChallenge ? selectedChallenge.play : null,
+      acceptedText: selectedChallenge ? formatDate(selectedChallenge.acceptedAt) : '',
       feedbackOpen: false,
       rating: 0,
       selectedTags: [],
       note: ''
     })
+  },
+
+  selectChallenge(event) {
+    this.loadChallenges(event.currentTarget.dataset.id)
   },
 
   openMap() {
@@ -94,7 +109,7 @@ Page({
       return
     }
     const app = getApp()
-    app.completeChallenge({
+    app.completeChallenge(this.data.play.id, {
       rating: this.data.rating,
       feedbackTags: this.data.selectedTags,
       note: this.data.note.trim()
@@ -105,7 +120,7 @@ Page({
       justCompleted: true,
       completedPlay: this.data.play,
       completedCount,
-      current: null,
+      selectedChallenge: null,
       play: null,
       feedbackOpen: false
     })
@@ -118,8 +133,8 @@ Page({
       confirmText: '放回去',
       success: result => {
         if (!result.confirm) return
-        getApp().abandonChallenge()
-        this.setData({ current: null, play: null })
+        getApp().abandonChallenge(this.data.play.id)
+        this.loadChallenges('')
       }
     })
   },

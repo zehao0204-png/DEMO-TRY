@@ -3,4 +3,4 @@ node_modules/
 *.log
 miniprogram_npm/
 private.config.json
-
+project.private.config.json

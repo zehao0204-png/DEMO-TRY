@@ -109,16 +109,19 @@
 }
 
 .mood-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .mood-chip {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  box-sizing: border-box;
+  width: calc(50% - 7rpx);
   height: 78rpx;
+  margin: 0 0 14rpx;
   padding: 0 16rpx;
   background: rgba(255, 253, 248, 0.66);
   border: 2rpx solid rgba(25, 24, 22, 0.1);
@@ -419,4 +422,3 @@
   font-size: 20rpx;
   text-align: center;
 }
-

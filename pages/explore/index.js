@@ -1,5 +1,6 @@
 const plays = require('../../data/plays')
 const { buildProfile } = require('../../utils/recommend')
+const { getLevel } = require('../../utils/progress')
 
 const playMap = Object.fromEntries(plays.map(play => [play.id, play]))
 const faces = ['', '😕', '😐', '🙂', '🤩']
@@ -21,8 +22,9 @@ Page({
     completedCount: 0,
     districtCount: 0,
     averageRating: '—',
-    levelName: '沙发观察员',
-    nextLevelText: '完成第一个挑战，正式开始探索',
+    levelNumber: 1,
+    levelName: '上海城市玩家',
+    nextLevelText: '再完成 4 次升级到 LV.2',
     levelProgress: 0,
     profile: { title: '', description: '', topTags: [] },
     badges: [],
@@ -44,7 +46,7 @@ Page({
     const completed = records.filter(record => record.status === 'completed')
     const districts = new Set(completed.map(record => playMap[record.playId]?.district).filter(Boolean))
     const ratingTotal = completed.reduce((sum, record) => sum + record.rating, 0)
-    const level = this.getLevel(completed.length)
+    const level = getLevel(completed.length)
     const badges = [
       { icon: '🚪', name: '周末出逃者', need: '完成1次挑战', unlocked: completed.length >= 1 },
       { icon: '👟', name: '街区漫游者', need: '完成3次步行探索', unlocked: countTrait(completed, 'walk') >= 3 },
@@ -69,6 +71,7 @@ Page({
       completedCount: completed.length,
       districtCount: districts.size,
       averageRating: completed.length ? (ratingTotal / completed.length).toFixed(1) : '—',
+      levelNumber: level.level,
       levelName: level.name,
       nextLevelText: level.next,
       levelProgress: level.progress,
@@ -77,14 +80,6 @@ Page({
       timeline,
       hasRecords: records.length > 0
     })
-  },
-
-  getLevel(count) {
-    if (count >= 10) return { name: '上海生活冒险家', next: '你已经有自己的城市路线', progress: 100 }
-    if (count >= 6) return { name: '城市隐藏款猎人', next: `再完成 ${10 - count} 次升级`, progress: 75 + (count - 6) * 6 }
-    if (count >= 3) return { name: '街区漫游者', next: `再完成 ${6 - count} 次升级`, progress: 45 + (count - 3) * 10 }
-    if (count >= 1) return { name: '周末出逃者', next: `再完成 ${3 - count} 次升级`, progress: 20 + count * 10 }
-    return { name: '沙发观察员', next: '完成第一个挑战，正式开始探索', progress: 8 }
   },
 
   goHome() {

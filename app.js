@@ -3,7 +3,7 @@ const { applyFeedback } = require('./utils/recommend')
 const STORAGE_KEY = 'weekend-unboxed-state-v1'
 function emptyState() {
   return {
-    current: null,
+    challenges: [],
     records: [],
     tagScores: {},
     seenIds: []
@@ -13,7 +13,12 @@ function emptyState() {
 App({
   getState() {
     const saved = wx.getStorageSync(STORAGE_KEY)
-    return saved && saved.records ? saved : emptyState()
+    if (!saved || !saved.records) return emptyState()
+    const challenges = Array.isArray(saved.challenges)
+      ? saved.challenges
+      : saved.current ? [saved.current] : []
+    const { current, ...rest } = saved
+    return { ...emptyState(), ...rest, challenges: challenges.slice(0, 4) }
   },
 
   saveState(state) {
@@ -29,41 +34,39 @@ App({
 
   acceptChallenge(playId) {
     const state = this.getState()
-    if (state.current && state.current.playId !== playId) {
-      state.records.unshift({
-        ...state.current,
-        status: 'abandoned',
-        finishedAt: Date.now()
-      })
-    }
-    state.current = { playId, acceptedAt: Date.now(), status: 'active' }
-    return this.saveState(state)
+    if (state.challenges.some(item => item.playId === playId)) return 'exists'
+    if (state.challenges.length >= 4) return 'full'
+    state.challenges.push({ playId, acceptedAt: Date.now(), status: 'active' })
+    this.saveState(state)
+    return 'accepted'
   },
 
-  abandonChallenge() {
+  abandonChallenge(playId) {
     const state = this.getState()
-    if (!state.current) return state
+    const challenge = state.challenges.find(item => item.playId === playId)
+    if (!challenge) return state
     state.records.unshift({
-      ...state.current,
+      ...challenge,
       status: 'abandoned',
       finishedAt: Date.now()
     })
-    state.current = null
+    state.challenges = state.challenges.filter(item => item.playId !== playId)
     return this.saveState(state)
   },
 
-  completeChallenge(feedback, play) {
+  completeChallenge(playId, feedback, play) {
     const state = this.getState()
-    if (!state.current || state.current.playId !== play.id) return state
+    const challenge = state.challenges.find(item => item.playId === playId)
+    if (!challenge || playId !== play.id) return state
     const record = {
-      ...state.current,
+      ...challenge,
       ...feedback,
       status: 'completed',
       finishedAt: Date.now()
     }
     state.records.unshift(record)
     state.tagScores = applyFeedback(state.tagScores, play, feedback.rating)
-    state.current = null
+    state.challenges = state.challenges.filter(item => item.playId !== playId)
     return this.saveState(state)
   }
 })

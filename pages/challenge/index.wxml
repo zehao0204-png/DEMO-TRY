@@ -20,10 +20,25 @@
   <block wx:elif="{{play}}">
     <view class="challenge-header">
       <view class="eyebrow">YOUR WEEKEND QUEST</view>
-      <view class="challenge-count">01 / ACTIVE</view>
+      <view class="challenge-count">{{activeChallenges.length}} / 4 ACTIVE</view>
     </view>
 
-    <view class="challenge-title">这周，就完成这一件事。</view>
+    <view class="challenge-title">这周，最多完成四件事。</view>
+
+    <scroll-view wx:if="{{activeChallenges.length > 1}}" class="challenge-scroll" scroll-x enable-flex>
+      <view class="challenge-tabs">
+        <button
+          wx:for="{{activeChallenges}}"
+          wx:key="playId"
+          class="challenge-tab {{play.id === item.playId ? 'challenge-tab--active' : ''}}"
+          data-id="{{item.playId}}"
+          bindtap="selectChallenge"
+        >
+          <text class="challenge-tab-emoji">{{item.play.emoji}}</text>
+          <text class="challenge-tab-title">{{item.play.title}}</text>
+        </button>
+      </view>
+    </scroll-view>
 
     <view class="quest-card card">
       <view class="quest-ticket">

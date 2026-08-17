@@ -16,14 +16,21 @@ Page({
     reason: '',
     wildcard: false,
     isDrawing: false,
-    activePlay: null,
+    activeCount: 0,
+    activeSummary: '',
     loadingText: '正在翻找上海的隐藏玩法…'
   },
 
   onShow() {
     const state = getApp().getState()
+    const activePlays = state.challenges
+      .map(challenge => plays.find(play => play.id === challenge.playId))
+      .filter(Boolean)
     this.setData({
-      activePlay: state.current ? plays.find(play => play.id === state.current.playId) : null
+      activeCount: activePlays.length,
+      activeSummary: activePlays.length === 1
+        ? activePlays[0].title
+        : `${activePlays.length} 个挑战已经排进周末`
     })
   },
 
@@ -69,26 +76,23 @@ Page({
     const play = this.data.play
     if (!play) return
     const state = getApp().getState()
-    if (state.current && state.current.playId === play.id) {
+    if (state.challenges.some(item => item.playId === play.id)) {
       wx.switchTab({ url: '/pages/challenge/index' })
       return
     }
-    if (state.current) {
-      wx.showModal({
-        title: '替换本周挑战？',
-        content: '之前收下的挑战会被放回记录，但不会增加闯关进度。',
-        confirmText: '替换',
-        success: result => {
-          if (result.confirm) this.saveChallenge(play)
-        }
-      })
+    if (state.challenges.length >= 4) {
+      wx.showToast({ title: '本周挑战已满 4/4', icon: 'none' })
       return
     }
     this.saveChallenge(play)
   },
 
   saveChallenge(play) {
-    getApp().acceptChallenge(play.id)
+    const result = getApp().acceptChallenge(play.id)
+    if (result === 'full') {
+      wx.showToast({ title: '本周挑战已满 4/4', icon: 'none' })
+      return
+    }
     wx.showToast({ title: '挑战已收下', icon: 'success' })
     setTimeout(() => wx.switchTab({ url: '/pages/challenge/index' }), 450)
   },
@@ -117,4 +121,3 @@ Page({
     }
   }
 })
-

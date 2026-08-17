@@ -28,7 +28,7 @@
         <view class="level-label">当前等级</view>
         <view class="level-name">{{levelName}}</view>
       </view>
-      <view class="level-number">LV.{{completedCount + 1}}</view>
+      <view class="level-number">LV.{{levelNumber}}</view>
     </view>
     <view class="progress-track">
       <view class="progress-fill" style="width: {{levelProgress}}%;"></view>
@@ -99,4 +99,3 @@
     <button class="primary-button archive-button" bindtap="goHome">开始第一次探索</button>
   </view>
 </view>
-

@@ -13,10 +13,10 @@
     <text class="hero-copy">一个具体任务，一次陌生体验。你只需要出门。</text>
   </view>
 
-  <view wx:if="{{activePlay}}" class="active-banner" bindtap="goChallenge">
+  <view wx:if="{{activeCount}}" class="active-banner" bindtap="goChallenge">
     <view>
-      <text class="active-label">本周挑战进行中</text>
-      <text class="active-title">{{activePlay.title}}</text>
+      <text class="active-label">本周挑战进行中 · {{activeCount}}/4</text>
+      <text class="active-title">{{activeSummary}}</text>
     </view>
     <text class="active-arrow">→</text>
   </view>
@@ -104,4 +104,3 @@
 
   <view class="footer-note">不需要做完上海，只需要比上周多走一步。</view>
 </view>
-

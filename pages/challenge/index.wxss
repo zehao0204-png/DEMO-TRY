@@ -19,6 +19,54 @@
   line-height: 1.2;
 }
 
+.challenge-scroll {
+  width: calc(100% + 32rpx);
+  margin: -10rpx 0 28rpx;
+}
+
+.challenge-tabs {
+  display: inline-flex;
+  gap: 14rpx;
+  padding: 6rpx 32rpx 10rpx 0;
+}
+
+.challenge-tab {
+  display: flex;
+  box-sizing: border-box;
+  width: 280rpx;
+  height: 100rpx;
+  align-items: center;
+  margin: 0;
+  padding: 16rpx;
+  background: rgba(255, 253, 248, 0.7);
+  border: 2rpx solid rgba(25, 24, 22, 0.12);
+  border-radius: 20rpx;
+  color: #625e57;
+  text-align: left;
+}
+
+.challenge-tab--active {
+  background: #f3c64e;
+  border-color: #191816;
+  color: #191816;
+  box-shadow: 4rpx 4rpx 0 #191816;
+}
+
+.challenge-tab-emoji {
+  flex: 0 0 48rpx;
+  font-size: 34rpx;
+}
+
+.challenge-tab-title {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 20rpx;
+  font-weight: 800;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 .quest-card {
   padding: 0 32rpx 36rpx;
   overflow: hidden;
@@ -410,4 +458,3 @@
   margin-top: 24rpx;
   background: #d65335;
 }
-
