@@ -14,10 +14,8 @@ Page({
     feedbackOpen: false,
     rating: 0,
     ratingOptions: [
-      { value: 1, face: '😕', label: '不喜欢' },
-      { value: 2, face: '😐', label: '一般' },
-      { value: 3, face: '🙂', label: '不错' },
-      { value: 4, face: '🤩', label: '超出预期' }
+      { value: 4, face: '🙂', label: '满意' },
+      { value: 1, face: '😕', label: '不满意' }
     ],
     positiveTags: ['很新鲜', '很放松', '氛围很好', '性价比高', '还想再去', '意外发现'],
     negativeTags: ['太远了', '太贵了', '太累了', '人太多', '不够特别', '信息不准确'],
