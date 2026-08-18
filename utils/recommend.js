@@ -21,8 +21,9 @@ function pickPlay(plays, options = {}) {
   const tagScores = options.tagScores || {}
   const seen = new Set(options.seenIds || [])
   const random = options.random || Math.random
-  let candidates = plays.filter(play => !seen.has(play.id))
-  if (!candidates.length) candidates = plays
+  const recommendable = plays.filter(play => play.recommendable !== false && play.status !== 'legacy')
+  let candidates = recommendable.filter(play => !seen.has(play.id))
+  if (!candidates.length) candidates = recommendable
 
   if (mood !== 'random') {
     const moodMatches = candidates.filter(play => play.moods.includes(mood))

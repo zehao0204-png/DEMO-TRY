@@ -1,8 +1,6 @@
-const plays = require('../../data/plays')
 const { buildProfile } = require('../../utils/recommend')
 const { getLevel } = require('../../utils/progress')
 
-const playMap = Object.fromEntries(plays.map(play => [play.id, play]))
 const faces = ['', '😕', '😐', '🙂', '🤩']
 
 function formatDate(timestamp) {
@@ -10,7 +8,7 @@ function formatDate(timestamp) {
   return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`
 }
 
-function countTrait(completed, trait) {
+function countTrait(completed, trait, playMap) {
   return completed.filter(record => {
     const play = playMap[record.playId]
     return play && play.traits.includes(trait)
@@ -40,13 +38,20 @@ Page({
     this.refresh()
   },
 
+  onCatalogReady() {
+    this.refresh()
+  },
+
   onPullDownRefresh() {
     this.refresh()
     wx.stopPullDownRefresh()
   },
 
   refresh() {
-    const state = getApp().getState()
+    const app = getApp()
+    const state = app.getState()
+    const plays = app.getPlays()
+    const playMap = Object.fromEntries(plays.map(play => [play.id, play]))
     const records = state.records
     const completed = records.filter(record => record.status === 'completed')
     const completedCount = state.stats.completedCount
@@ -55,9 +60,9 @@ Page({
     const level = getLevel(completedCount)
     const badges = [
       { icon: '🚪', name: '周末出逃者', need: '完成1次挑战', unlocked: completed.length >= 1 },
-      { icon: '👟', name: '街区漫游者', need: '完成3次步行探索', unlocked: countTrait(completed, 'walk') >= 3 },
-      { icon: '🌙', name: '夜行动物', need: '完成2次夜间挑战', unlocked: countTrait(completed, 'night') >= 2 },
-      { icon: '🎨', name: '野生文艺青年', need: '完成3次文艺挑战', unlocked: countTrait(completed, 'culture') >= 3 },
+      { icon: '👟', name: '街区漫游者', need: '完成3次步行探索', unlocked: countTrait(completed, 'walk', playMap) >= 3 },
+      { icon: '🌙', name: '夜行动物', need: '完成2次夜间挑战', unlocked: countTrait(completed, 'night', playMap) >= 2 },
+      { icon: '🎨', name: '野生文艺青年', need: '完成3次文艺挑战', unlocked: countTrait(completed, 'culture', playMap) >= 3 },
       { icon: '🗺️', name: '跨区玩家', need: '点亮4个上海区域', unlocked: districts.size >= 4 },
       { icon: '🎲', name: '隐藏款猎人', need: '完成8次不同挑战', unlocked: completed.length >= 8 }
     ]

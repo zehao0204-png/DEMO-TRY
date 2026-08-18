@@ -1,5 +1,5 @@
-const plays = require('../../data/plays')
 const { pickPlay } = require('../../utils/recommend')
+const { getMapLocation } = require('../../utils/location')
 
 Page({
   data: {
@@ -28,7 +28,9 @@ Page({
   },
 
   onShow() {
-    const state = getApp().getState()
+    const app = getApp()
+    const state = app.getState()
+    const plays = app.getPlays()
     const activePlays = state.challenges
       .map(challenge => plays.find(play => play.id === challenge.playId))
       .filter(Boolean)
@@ -41,6 +43,10 @@ Page({
   },
 
   onCloudStateReady() {
+    this.onShow()
+  },
+
+  onCatalogReady() {
     this.onShow()
   },
 
@@ -67,7 +73,7 @@ Page({
     this.drawTimer = setTimeout(() => {
       const app = getApp()
       const state = app.getState()
-      const result = pickPlay(plays, {
+      const result = pickPlay(app.getPlays(), {
         mood: this.data.selectedMood,
         tagScores: state.tagScores,
         seenIds: state.seenIds
@@ -110,9 +116,10 @@ Page({
   openMap() {
     const play = this.data.play
     if (!play) return
+    const location = getMapLocation(play)
     wx.openLocation({
-      latitude: play.latitude,
-      longitude: play.longitude,
+      latitude: location.latitude,
+      longitude: location.longitude,
       name: play.location,
       address: play.address,
       scale: 16

@@ -1,4 +1,4 @@
-module.exports = [
+const legacyPlays = [
   {
     id: 'ferry-sunset',
     emoji: '⛴️',
@@ -361,3 +361,9 @@ module.exports = [
   }
 ]
 
+const { buildAdditionalPlays, enrichLegacyPlays } = require('./catalog')
+
+module.exports = [
+  ...enrichLegacyPlays(legacyPlays),
+  ...buildAdditionalPlays()
+]

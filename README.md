@@ -11,7 +11,9 @@
 - 本地探索档案、区域统计、成就印章和城市人格
 - 每完成4个挑战升一级，等级无上限
 - 基于真实反馈的轻量个性化推荐（70%偏好、20%邻近探索、10%随机惊喜的产品原则）
-- 微信本地存储，无需服务器即可体验完整闭环
+- 100条可推荐上海活动，覆盖25个真实地点
+- 每条活动包含官方来源、核验日期和可导航坐标
+- 云端活动目录与本地离线兜底
 
 ## 在微信开发者工具中运行
 
@@ -29,6 +31,8 @@
 node tests/recommend.test.js
 node tests/app-state.test.js
 node tests/cloud-sync.test.js
+node tests/catalog.test.js
+node scripts/build-cloud-catalog.js --check
 ```
 
 ## 项目结构
@@ -37,19 +41,21 @@ node tests/cloud-sync.test.js
 pages/index       玩法盲盒
 pages/challenge   本周挑战与完成反馈
 pages/explore     探索档案与城市人格
-data/plays.js     上海玩法样本库
+data/plays.js     上海玩法离线目录
+data/catalog.js   真实地点、来源与任务生成规则
 utils/recommend   推荐与画像逻辑
-cloudfunctions    用户状态云同步函数
+cloudfunctions    用户状态同步与活动目录函数
 ```
 
 ## 开通云数据库同步
 
 1. 在微信开发者工具顶部点击「云开发」，创建或选择一个云环境。
 2. 在开发者工具中右键 `cloudfunctions/syncState`，选择「上传并部署：云端安装依赖」。
-3. 重新编译。云函数首次运行时会自动创建 `user_states` 集合，挑战、评价、等级和偏好会自动同步。
+3. 同样部署 `cloudfunctions/getPlays`。
+4. 重新编译。云函数首次运行时会自动创建 `user_states` 和 `plays` 集合。
 
 小程序始终先写入本地缓存；网络或云函数暂时不可用时，核心流程仍可继续使用。云端文档以微信 OPENID 隔离，客户端不直接访问数据库。
 
-## MVP边界
+## 活动真实性
 
-当前版本已接入用户状态云同步；玩法内容仍使用本地样本库，暂未建设内容运营后台和地图数据接口。
+活动地点来自上海市文旅局、上海市政府、上海市绿化市容局、上海图书馆和上海市文旅推广网等官方来源。大模型只用于生成玩法任务；地点、地址、开放说明和来源必须通过 `tests/catalog.test.js` 校验后才能发布。开放时间、收费和临时闭馆仍可能变化，小程序会提示用户出发前查看官方来源。

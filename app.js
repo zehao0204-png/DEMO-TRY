@@ -1,6 +1,8 @@
 const { applyFeedback } = require('./utils/recommend')
+const localPlays = require('./data/plays')
 
 const STORAGE_KEY = 'weekend-unboxed-state-v1'
+const CATALOG_STORAGE_KEY = 'weekend-unboxed-catalog-v1'
 function emptyState() {
   return {
     challenges: [],
@@ -14,12 +16,32 @@ function emptyState() {
 
 App({
   onLaunch() {
+    this.catalog = wx.getStorageSync(CATALOG_STORAGE_KEY) || null
     if (!wx.cloud) return
     const options = { traceUser: true }
     if (wx.cloud.DYNAMIC_CURRENT_ENV) options.env = wx.cloud.DYNAMIC_CURRENT_ENV
     wx.cloud.init(options)
     this.cloudEnabled = true
-    this.cloudReady = this.syncFromCloud()
+    this.cloudReady = Promise.all([this.syncFromCloud(), this.syncCatalog()])
+  },
+
+  getPlays() {
+    if (!Array.isArray(this.catalog) || !this.catalog.length) return localPlays
+    const cloudIds = new Set(this.catalog.map(play => play.id))
+    return [...this.catalog, ...localPlays.filter(play => !cloudIds.has(play.id))]
+  },
+
+  async syncCatalog() {
+    try {
+      const response = await wx.cloud.callFunction({ name: 'getPlays' })
+      const plays = response.result?.plays
+      if (!Array.isArray(plays) || plays.length < 20) throw new Error('Invalid cloud catalog')
+      this.catalog = plays
+      wx.setStorageSync(CATALOG_STORAGE_KEY, plays)
+      this.notifyCatalogReady()
+    } catch (error) {
+      console.warn('云端活动库暂不可用，继续使用已核验的本地活动', error)
+    }
   },
 
   getState() {
@@ -110,6 +132,13 @@ App({
     const pages = getCurrentPages()
     const page = pages[pages.length - 1]
     if (page && typeof page.onCloudStateReady === 'function') page.onCloudStateReady()
+  },
+
+  notifyCatalogReady() {
+    if (typeof getCurrentPages !== 'function') return
+    const pages = getCurrentPages()
+    const page = pages[pages.length - 1]
+    if (page && typeof page.onCatalogReady === 'function') page.onCatalogReady()
   },
 
   recordSeen(playId) {

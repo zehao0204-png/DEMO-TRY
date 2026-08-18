@@ -1,7 +1,8 @@
 const assert = require('assert')
 const { normalizeState } = require('../cloudfunctions/syncState/state')
 
-let saved = {
+const storage = {}
+storage['weekend-unboxed-state-v1'] = {
   challenges: [],
   records: [],
   tagScores: {},
@@ -18,24 +19,29 @@ const remoteState = {
   updatedAt: 2
 }
 const calls = []
+const catalog = require('../data/plays').filter(play => play.recommendable !== false)
 let app
 let notified = 0
 
 global.wx = {
-  getStorageSync: () => saved,
-  setStorageSync: (key, value) => { saved = value },
+  getStorageSync: key => storage[key],
+  setStorageSync: (key, value) => { storage[key] = value },
   cloud: {
     DYNAMIC_CURRENT_ENV: 'dynamic',
     init: options => calls.push({ init: options }),
     callFunction: async request => {
       calls.push(request)
+      if (request.name === 'getPlays') return { result: { plays: catalog } }
       return request.data.action === 'get'
         ? { result: { exists: true, state: remoteState } }
         : { result: { saved: true } }
     }
   }
 }
-global.getCurrentPages = () => [{ onCloudStateReady: () => { notified += 1 } }]
+global.getCurrentPages = () => [{
+  onCloudStateReady: () => { notified += 1 },
+  onCatalogReady: () => { notified += 1 }
+}]
 global.App = config => { app = config }
 
 require('../app')
@@ -43,9 +49,11 @@ require('../app')
 async function run() {
   app.onLaunch()
   await app.cloudReady
+  const saved = storage['weekend-unboxed-state-v1']
   assert.strictEqual(saved.challenges[0].playId, 'remote-play')
   assert.strictEqual(saved.stats.completedCount, 8)
-  assert.strictEqual(notified, 1)
+  assert.strictEqual(app.getPlays().filter(play => play.recommendable !== false).length, 100)
+  assert.strictEqual(notified, 2)
 
   app.acceptChallenge('local-play')
   await app.flushCloudSync()

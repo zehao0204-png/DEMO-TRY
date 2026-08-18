@@ -1,4 +1,4 @@
-const plays = require('../../data/plays')
+const { getMapLocation } = require('../../utils/location')
 
 function formatDate(timestamp) {
   const date = new Date(timestamp)
@@ -38,8 +38,14 @@ Page({
     if (!this.data.justCompleted) this.loadChallenges(this.data.play ? this.data.play.id : '')
   },
 
+  onCatalogReady() {
+    if (!this.data.justCompleted) this.loadChallenges(this.data.play ? this.data.play.id : '')
+  },
+
   loadChallenges(preferredPlayId) {
-    const state = getApp().getState()
+    const app = getApp()
+    const state = app.getState()
+    const plays = app.getPlays()
     const activeChallenges = state.challenges.map(challenge => ({
       ...challenge,
       play: plays.find(item => item.id === challenge.playId)
@@ -65,9 +71,10 @@ Page({
   openMap() {
     const play = this.data.play
     if (!play) return
+    const location = getMapLocation(play)
     wx.openLocation({
-      latitude: play.latitude,
-      longitude: play.longitude,
+      latitude: location.latitude,
+      longitude: location.longitude,
       name: play.location,
       address: play.address,
       scale: 16
